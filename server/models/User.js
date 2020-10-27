@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
+var date = new Date();
+date.setHours(date.getHours() + 3);
+
 const User = mongoose.model('User', new mongoose.Schema({
     name: {
         type: String,
@@ -35,7 +38,7 @@ const User = mongoose.model('User', new mongoose.Schema({
     },
     city: String
 
-}, { timestamps: true }));
+}, { timestamps: { currentTime: () =>  date }}));
 /*
 function validateUser(User) {
     const schema = Joi.object({

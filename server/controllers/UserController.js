@@ -18,3 +18,33 @@ exports.signup = async (req, res) => {
         res.send(user);
     }
 }
+
+exports.findFromEmail = async (req, res) => {
+    let user = await User.find({
+        email: req.body.email
+    });
+
+    if (!user) {
+        return res.status(400).send('Bu email ile kullanici bulunamadi.');
+    } else {
+        res.send(user);
+    }
+}
+
+exports.deleteFromEmail = async (req, res) => {
+    let user = await User.find({
+        email: req.body.email
+    });
+
+    if (!user) {
+        return res.status(400).send('Bu email ile kullanici bulunamadi');
+    } else {
+        await User.deleteOne(user, function (err) {
+            if (err) {
+                res.send(err)
+            } else {
+                res.send('Silindi.')
+            }
+        });
+    }
+}
