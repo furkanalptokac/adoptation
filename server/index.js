@@ -2,12 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const app = express();
-
 const PORT = process.env.PORT || 5000;
-
-const routes = require('./routes');
+const indexRoutes = require('./routes/index');
+const userRoutes = require('./routes/user');
 const dbConfig = require('./config/config');
 
 const corsOptions = {
@@ -17,7 +17,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(routes);
+app.use(indexRoutes);
+app.use(userRoutes);
 
 mongoose.Promise = global.Promise;
 
