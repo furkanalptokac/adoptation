@@ -3,7 +3,13 @@ const router = require('express').Router();
 
 router.post('/signup', UserController.signup);
 
-router.get('/getuser', UserController.findFromEmail);
+router.get('/finduser', UserController.findFromEmail);
+
+router.get('/getallusers', UserController.findAllUsers);
+
+router.get('/findfromid/:id', UserController.findFromId);
+
+router.put('/updateuser/:id', UserController.updateUser);
 
 router.delete('/deleteuser', UserController.deleteFromEmail);
 

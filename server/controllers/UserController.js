@@ -31,20 +31,51 @@ exports.findFromEmail = async (req, res) => {
     }
 }
 
-exports.deleteFromEmail = async (req, res) => {
-    let user = await User.find({
-        email: req.body.email
-    });
+exports.findFromId = async (req, res) => {
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(user);
+        }
+    })
+}
 
-    if (!user) {
-        return res.status(400).send('Bu email ile kullanici bulunamadi');
-    } else {
-        await User.deleteOne(user, function (err) {
-            if (err) {
-                res.send(err)
-            } else {
-                res.send('Silindi.')
-            }
+exports.findAllUsers = async (req, res) => {
+    await User.find({}, function (err, users) {
+        var userMap = {};
+
+        users.forEach(function (user) {
+            userMap[user._id] = user;
         });
-    }
+
+        res.send(userMap);
+    });
+}
+
+exports.deleteFromEmail = async (req, res) => {
+    User.deleteOne({ 
+        email: req.body.email
+    }).then(function () {
+        res.send('Silindi');
+    }).catch(function (err) {
+        res.send(err);
+    });
+}
+
+exports.updateUser = async (req, res) => {
+    await User.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+        password: req.body.password,
+        bio: req.body.bio,
+        city: req.body.city
+    }, function (err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
 }
