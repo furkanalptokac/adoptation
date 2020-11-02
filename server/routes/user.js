@@ -11,6 +11,8 @@ router.get('/findfromid/:id', UserController.findFromId);
 
 router.put('/updateuser/:id', UserController.updateUser);
 
+router.put('/updatepassword/:id', UserController.updatePassword);
+
 router.delete('/deleteuser', UserController.deleteFromEmail);
 
 module.exports = router;

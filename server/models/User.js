@@ -38,7 +38,7 @@ const User = mongoose.model('User', new mongoose.Schema({
     },
     city: String
 
-}, { timestamps: { currentTime: () =>  date }}));
+}, { timestamps: { currentTime: () =>  date } }));
 /*
 function validateUser(User) {
     const schema = Joi.object({

@@ -1,8 +1,21 @@
 const mongoose = require('mongoose');
 
-const PostSchema = mongoose.Schema({
-    title: String,
-    description: String
-}, { timestamps: true });
+var date = new Date();
+date.setHours(date.getHours() + 3);
 
-module.exports = mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post', new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 100
+    },
+    description: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 300
+    }
+}, { timestamps: { currentTime: () => date } }));
+
+exports.Post = Post;

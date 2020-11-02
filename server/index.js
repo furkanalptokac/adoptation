@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const indexRoutes = require('./routes/index');
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 const dbConfig = require('./config/config');
 
 const corsOptions = {
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(indexRoutes);
 app.use(userRoutes);
+app.use(postRoutes);
 
 mongoose.Promise = global.Promise;
 

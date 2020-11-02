@@ -79,3 +79,15 @@ exports.updateUser = async (req, res) => {
         }
     });
 }
+
+exports.updatePassword = async (req, res) => {
+    await User.findByIdAndUpdate(req.params.id, {
+        password: req.body.password
+    }, function (err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+}
