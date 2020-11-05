@@ -9,3 +9,15 @@ exports.createPost = async (req, res) => {
     await post.save();
     res.send(post);
 }
+
+exports.getAllPosts = async (req, res) => {
+    await Post.find({}, function (err, posts) {
+        var postMap = {};
+
+        posts.forEach(function (post) {
+            postMap[post._id] = post;
+        });
+
+        res.send(postMap);
+    });
+}

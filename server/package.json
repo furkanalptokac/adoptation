@@ -1,11 +1,11 @@
 {
   "name": "sahiplenn",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A pet adoption application.",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node server",
+    "server": "nodemon server"
   },
   "repository": {
     "type": "git",
