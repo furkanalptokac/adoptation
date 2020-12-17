@@ -4,7 +4,6 @@ const emailValidator = require('email-validator');
 const passwordGenerator = require('generate-password');
 const nodemailer = require('nodemailer');
 const { User } = require('../models/User');
-const emailPassword = require('../config/password');
 
 const schema = new passwordValidator();
 
