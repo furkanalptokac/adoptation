@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const passwordValidator = require('password-validator');
 const emailValidator = require('email-validator');
-const generator = require('generate-password');
+const passwordGenerator = require('generate-password');
 const nodemailer = require('nodemailer');
 const { User } = require('../models/User');
 const emailPassword = require('../config/password');
@@ -38,7 +38,7 @@ exports.signup = async (req, res) => {
                 port: 587,
                 auth: {
                     user: 'sahiplenn@furkanalp.com',
-                    pass: emailPassword.password
+                    pass: ''
                 },
                 tls: {
                     rejectUnauthorized: false
@@ -56,7 +56,6 @@ exports.signup = async (req, res) => {
                 if (error) {
                     return console.log(error.message);
                 }
-        
                 console.log('Message sent: %s', info.messageId);
             });
 
@@ -139,11 +138,59 @@ exports.updatePassword = async (req, res) => {
     });
 }
 
-exports.generateRandomPassword = async (req, res) => {
-    const password = generator.generate({
+exports.forgotPassword = async (req, res) => {
+    await User.findById(req.bod)
+
+    const password = passwordGenerator.generate({
         length: 10,
         numbers: true
     });
 
-    console.log(password);
+    let transporter = nodemailer.createTransport({
+        host: 'mail.furkanalp.com',
+        port: 587,
+        auth: {
+            user: 'sahiplenn@furkanalp.com',
+            pass: ''
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+
+    let mailOptions = {
+        from: 'sahiplenn@furkanalp.com',
+        to: req.body.email,
+        subject: 'Sahiplenn Destek',
+        text: 'Şifreniz başarıyla sıfırlanmıştır. Yeni şifreniz ' + password
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error.message);
+        }
+        console.log('Message sent: %s', info.messageId);
+    });
+
+    let hashedPassword = bcrypt.hashSync(password, 10);
+
+    await User.findByIdAndUpdate(req.params.id), {
+        password: hashedPassword
+    }, function (err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    }
+}
+
+exports.deleteFromId = async (req, res) => {
+    await User.findByIdAndRemove(req.params.id, function (err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    })
 }
