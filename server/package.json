@@ -4,15 +4,15 @@
   "description": "A pet adoption application.",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/furkanalptokac/sahiplenn.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Furkan Alp Tokac <me@furkanalp.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/furkanalptokac/sahiplenn/issues"

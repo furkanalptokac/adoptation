@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Joi = require('joi');
 
 var date = new Date();
 date.setHours(date.getHours() + 3);
@@ -27,8 +26,8 @@ const User = mongoose.model('User', new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 4,
-        maxlength: 1024
+        minlength: 1,
+        maxlength: 7000
     },
     bio: {
         type: String,
@@ -36,22 +35,15 @@ const User = mongoose.model('User', new mongoose.Schema({
         minlength: 2,
         maxlength: 100
     },
-    city: String
-
+    city: {
+        type: String
+    },
+    /*
+    date: {
+        type: Date,
+        default: Date.now
+    }
+    */
 }, { timestamps: { currentTime: () =>  date } }));
-/*
-function validateUser(User) {
-    const schema = Joi.object({
-        name: Joi.string().min(5).max(50).required(),
-        surname: Joi.string().min(5).max(50).required(),
-        email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(1024).required(),
-        bio: Joi.string().min(5).max(100),
 
-    });
-
-    return schema.validate(User, schema);
-}
-exports.validate = validateUser;
-*/
 exports.User = User;

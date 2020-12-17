@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express-validator": "^6.6.1",
+    "nodemon": "^2.0.6"
+  }
+}

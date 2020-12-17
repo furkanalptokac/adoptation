@@ -15,6 +15,12 @@ const Post = mongoose.model('Post', new mongoose.Schema({
         required: true,
         minlength: 2,
         maxlength: 300
+    },
+    category: {
+        type: String,
+        required: true,
+        minlength: 2,
+        maxlength: 300
     }
 }, { timestamps: { currentTime: () => date } }));
 

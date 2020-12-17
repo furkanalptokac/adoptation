@@ -1,14 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Joi = require('joi');
-const connectDB = require('./config/db');
-
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-const userRoutes = require('./routes/api/users');
+const PORT = process.env.PORT || 5000;
+const connectDB = require('./config/db');
 const postRoutes = require('./routes/api/posts');
+const userRoutes = require('./routes/api/users');
 
 const corsOptions = {
     origin: "http://localhost:3000"
@@ -17,8 +15,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(userRoutes);
 app.use(postRoutes);
+app.use(userRoutes);
 
 connectDB();
 

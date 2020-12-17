@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { User, validate } = require('../models/User');
 
 exports.signup = async (req, res) => {
@@ -6,11 +7,12 @@ exports.signup = async (req, res) => {
     if (user) {
         return res.status(400).send('Kayitli kullanici mevcut.');
     } else {
+        let hashedPassword = bcrypt.hashSync(req.body.password, 10);
         user = new User({
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email,
-            password: req.body.password,
+            password: hashedPassword,
             bio: req.body.bio,
             city: req.body.city
         });
@@ -90,4 +92,12 @@ exports.updatePassword = async (req, res) => {
             res.send(result);
         }
     });
+}
+
+exports.deleteProfile = async (req, res) => {
+
+}
+
+exports.generateRandomPassword = async (req, res) => {
+    
 }
