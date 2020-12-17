@@ -26,8 +26,8 @@ const User = mongoose.model('User', new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 1,
-        maxlength: 7000
+        minlength: 3,
+        maxlength: 100
     },
     bio: {
         type: String,
