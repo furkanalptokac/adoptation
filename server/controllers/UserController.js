@@ -4,8 +4,9 @@ const emailValidator = require('email-validator');
 const passwordGenerator = require('generate-password');
 const nodemailer = require('nodemailer');
 const { User } = require('../models/User');
-
 const schema = new passwordValidator();
+const dotenv = require('dotenv');
+dotenv.config();
 
 schema
 .is().min(3)
@@ -31,13 +32,13 @@ exports.signup = async (req, res) => {
             });
             await user.save();
             res.send(user);
-
+            
             let transporter = nodemailer.createTransport({
-                host: 'mail.furkanalp.com',
-                port: 587,
+                host: process.env.HOST,
+                port: process.env.EMAIL_PORT,
                 auth: {
-                    user: 'sahiplenn@furkanalp.com',
-                    pass: ''
+                    user: process.env.EMAIL,
+                    pass: process.env.EMAIL_PW
                 },
                 tls: {
                     rejectUnauthorized: false
@@ -146,11 +147,11 @@ exports.forgotPassword = async (req, res) => {
     });
 
     let transporter = nodemailer.createTransport({
-        host: 'mail.furkanalp.com',
-        port: 587,
+        host: process.env.HOST,
+        port: process.env.EMAIL_PORT,
         auth: {
-            user: 'sahiplenn@furkanalp.com',
-            pass: ''
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PW
         },
         tls: {
             rejectUnauthorized: false
