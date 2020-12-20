@@ -5,18 +5,16 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/db');
-const postRoutes = require('./routes/api/posts');
-const userRoutes = require('./routes/api/users');
 
 const corsOptions = {
     origin: "http://localhost:3000"
 };
-
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(postRoutes);
-app.use(userRoutes);
+
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/posts', require('./routes/api/posts'));
 
 connectDB();
 

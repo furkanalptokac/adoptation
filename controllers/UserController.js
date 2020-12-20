@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 schema
-.is().min(3)
+.is().min(6)
 .is().max(100)
 .has().uppercase()
 .has().lowercase()
@@ -27,7 +27,6 @@ exports.signup = async (req, res) => {
                 surname: req.body.surname,
                 email: req.body.email,
                 password: hashedPassword,
-                bio: req.body.bio,
                 city: req.body.city
             });
             await user.save();
@@ -46,12 +45,12 @@ exports.signup = async (req, res) => {
             });
         
             let mailOptions = {
-                from: 'sahiplenn@furkanalp.com',
+                from: process.env.EMAIL,
                 to: req.body.email,
                 subject: 'Sahiplenn Destek',
                 text: 'Kaydınız başarıyla oluşturulmuştur.'
             };
-        
+            
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     return console.log(error.message);
@@ -115,7 +114,6 @@ exports.updateUser = async (req, res) => {
         surname: req.body.surname,
         email: req.body.email,
         password: req.body.password,
-        bio: req.body.bio,
         city: req.body.city
     }, function (err, result) {
         if (err) {
@@ -159,7 +157,7 @@ exports.forgotPassword = async (req, res) => {
     });
 
     let mailOptions = {
-        from: 'sahiplenn@furkanalp.com',
+        from: process.env.EMAIL,
         to: req.body.email,
         subject: 'Sahiplenn Destek',
         text: 'Şifreniz başarıyla sıfırlanmıştır. Yeni şifreniz ' + password
