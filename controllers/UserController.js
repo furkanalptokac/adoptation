@@ -3,6 +3,9 @@ const passwordValidator = require('password-validator');
 const emailValidator = require('email-validator');
 const passwordGenerator = require('generate-password');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar');
+const config = require('../config/config');
 const { User } = require('../models/User');
 const schema = new passwordValidator();
 const dotenv = require('dotenv');
@@ -21,16 +24,39 @@ exports.signup = async (req, res) => {
         return res.status(400).send('Kayitli kullanici mevcut.');
     } else {
         if (schema.validate(req.body.password) && emailValidator.validate(req.body.email)) {
+            let avatar = gravatar.url(req.body.email, {
+                s: '200',
+                r: 'pg',
+                d: 'mm'
+            });
+
             let hashedPassword = bcrypt.hashSync(req.body.password, 10);
             user = new User({
                 name: req.body.name,
                 surname: req.body.surname,
                 email: req.body.email,
                 password: hashedPassword,
-                city: req.body.city
+                city: req.body.city,
+                avatar: avatar
             });
+
             await user.save();
-            res.send(user);
+            
+            const payload = {
+                user: {
+                    id: user.id
+                }
+            }
+
+            jwt.sign(
+                payload,
+                config.jwtSecret,
+                { expiresIn: 360000 },
+                (err, token) => {
+                    if (err) throw err;
+                    res.json({ token })
+                }
+            );
             
             let transporter = nodemailer.createTransport({
                 host: process.env.HOST,
