@@ -9,11 +9,16 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        let decoded = jwt.verify(token, config.jwtSecret);
-
-        req.user = decoded.user;
-        next();
+        jwt.verify(token, config.jwtSecret, (error, decoded) => {
+            if (error) {
+                return res.status(401).json({ msg: 'Token is not valid.' });
+            } else {
+                req.user = decoded.user;
+                next();
+            }
+        });
     } catch (err) {
-        res.status(401).json({ msg: 'Token is not valid.' });
+        console.error('something wrong.');
+        res.status(500).json({ msg: 'Server error' });    
     }
 };

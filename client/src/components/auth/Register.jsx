@@ -28,14 +28,14 @@ const Register = () => {
                 password,
                 password2,
                 city
-            }
+            };
 
             try {
                 const config = {
                     headers: {
                         'Content-Type': 'Application/json'
                     }
-                }
+                };
 
                 const body = JSON.stringify(newUser);
                 const res = await axios.post('http://localhost:5000/api/users/signup', body, config);

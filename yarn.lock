@@ -579,6 +579,14 @@
   "resolved" "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   "version" "1.8.1"
 
+"express-validator@^6.8.1":
+  "integrity" "sha512-aBUdiMl7Nm36vh2nG9pmX6Mj+zQLeUtNfSrfh5i9nDAScazAzF+wS3euaBELRDW1LQbQ8/+XazcQ9TLM0IZqsg=="
+  "resolved" "https://registry.npmjs.org/express-validator/-/express-validator-6.8.1.tgz"
+  "version" "6.8.1"
+  dependencies:
+    "lodash" "^4.17.20"
+    "validator" "^13.5.2"
+
 "express@^4.17.1":
   "integrity" "sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.17.1.tgz"
@@ -1099,7 +1107,7 @@
   "resolved" "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz"
   "version" "4.1.1"
 
-"lodash@^4.17.15":
+"lodash@^4.17.15", "lodash@^4.17.20":
   "integrity" "sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA=="
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz"
   "version" "4.17.20"
@@ -2097,6 +2105,11 @@
   dependencies:
     "spdx-correct" "^3.0.0"
     "spdx-expression-parse" "^3.0.0"
+
+"validator@^13.5.2":
+  "integrity" "sha512-mD45p0rvHVBlY2Zuy3F3ESIe1h5X58GPfAtslBjY7EtTqGquZTj+VX/J4RnHWN8FKq0C9WRVt1oWAcytWRuYLQ=="
+  "resolved" "https://registry.npmjs.org/validator/-/validator-13.5.2.tgz"
+  "version" "13.5.2"
 
 "vary@^1", "vary@~1.1.2":
   "integrity" "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw="

@@ -57,7 +57,7 @@ exports.signup = async (req, res) => {
                     res.json({ token })
                 }
             );
-            
+
             let transporter = nodemailer.createTransport({
                 host: process.env.HOST,
                 port: process.env.EMAIL_PORT,
