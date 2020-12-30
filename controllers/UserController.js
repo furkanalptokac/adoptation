@@ -5,6 +5,7 @@ const passwordGenerator = require('generate-password');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const gravatar = require('gravatar');
+const { validationResult } = require('express-validator');
 const config = require('../config/config');
 const { User } = require('../models/User');
 const schema = new passwordValidator();
@@ -18,6 +19,10 @@ schema
 .has().lowercase()
 
 exports.signup = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
     let user = await User.findOne({ email: req.body.email });
 
     if (user) {

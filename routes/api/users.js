@@ -1,7 +1,8 @@
-const UserController = require('../../controllers/UserController');
 const router = require('express').Router();
+const UserController = require('../../controllers/UserController');
+const validator = require('../../controllers/validator');
 
-router.post('/signup', UserController.signup);
+router.post('/signup', validator.register, UserController.signup);
 
 router.get('/finduser', UserController.findFromEmail);
 
