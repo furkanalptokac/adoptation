@@ -6,21 +6,17 @@ import { login } from '../../actions/auth';
 
 const Login = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
-        name: '',
-        surname: '',
         email: '',
-        password: '',
-        password2: '',
-        city: ''
+        password: ''
     });
 
     const { email, password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value});
 
-    const onSubmit = async e => {
+    const onSubmit = e => {
         e.preventDefault();
-        login(email, password);
+        login({ email, password });
     };
 
     if (isAuthenticated) {
@@ -40,7 +36,7 @@ const Login = ({ login, isAuthenticated }) => {
                         placeholder="Email"
                         name="email"
                         value={email}
-                        onChange={e => onChange(e)}
+                        onChange={onChange}
                         required
                     />
                 </div>
@@ -50,7 +46,7 @@ const Login = ({ login, isAuthenticated }) => {
                         placeholder="Parola"
                         name="password"
                         value={password}
-                        onChange={e => onChange(e)}
+                        onChange={onChange}
                         minLength="6"
                         required
                     />
@@ -58,12 +54,12 @@ const Login = ({ login, isAuthenticated }) => {
                 <input type="submit" className="btn btn-primary" value="Giriş Yap" />
             </form>
             <p className="my-1">
-                Hesabınız yok mu? 
+                Hesabınız yok mu?
                 <Link to="/register">Kayıt Ol</Link>
             </p>
         </Fragment>
     )
-}
+};
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,

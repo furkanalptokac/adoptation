@@ -55,6 +55,7 @@ export const register = ({ name, surname, email, password, city }) => async disp
 };
 
 export const login = ({ email, password }) => async dispatch => {
+    console.log(email, password)
     const config = {
         headers: {
             'Content-Type': 'application/json'
@@ -64,7 +65,7 @@ export const login = ({ email, password }) => async dispatch => {
     const body = JSON.stringify({ email, password });
 
     try {
-        const res = await axios.post('http://localhost:5000/api/auth', body, config);
+        const res = await axios.post('http://localhost:5000/api/auth/', body, config);
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -83,4 +84,8 @@ export const login = ({ email, password }) => async dispatch => {
             type: LOGIN_FAIL
         });
     }
+}
+
+export const logout = () => dispatch => {
+    dispatch({ type: LOGOUT });
 }

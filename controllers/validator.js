@@ -7,3 +7,8 @@ exports.register = [
     check('password', 'Parolaniz gereksinimleri karsilamiyor.').isLength({ min: 6 }),
     check('city', 'Sehir bos olamaz.').notEmpty()
 ];
+
+exports.login = [
+    check('email', 'Lutfen gecerli email giriniz.').isEmail(),
+    check('password', 'Parolaniz gerekli.').exists(),
+];

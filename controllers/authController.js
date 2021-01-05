@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const { User } = require('../models/User');
+const { validationResult } = require('express-validator');
 
 exports.register = async (req, res) => {
     try {
@@ -14,19 +15,24 @@ exports.register = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
 
     try {
         let user = await User.findOne({ email });
-
+        console.log(user)
         if (!user) {
-            return res.status(400).json({ errors: [{ msg: 'Invalid credentials' }] });
+            return res.status(400).json({ errors: [{ msg: 'Bir seyler ters gitti.' }] });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({ errors: [{ msg: 'Invalid credentials pw' }] });
+            return res.status(400).json({ errors: [{ msg: 'Parolanız yanlış.' }] });
         }
 
         const payload = {
@@ -41,7 +47,7 @@ exports.login = async (req, res) => {
             { expiresIn: 360000 },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token })
+                res.json({ token });
             }
         );
     } catch (err) {
