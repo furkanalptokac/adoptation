@@ -28,12 +28,6 @@ const User = mongoose.model('User', new mongoose.Schema({
     avatar: {
         type: String
     }
-    /*
-    date: {
-        type: Date,
-        default: Date.now
-    }
-    */
 }, { timestamps: { currentTime: () =>  date } }));
 
 exports.User = User;
