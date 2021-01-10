@@ -12,3 +12,7 @@ exports.login = [
     check('email', 'Lutfen gecerli email giriniz.').isEmail(),
     check('password', 'Parolaniz gerekli.').exists(),
 ];
+
+exports.profilePost = [
+    check('status', 'Durum gerekli').notEmpty();
+];
