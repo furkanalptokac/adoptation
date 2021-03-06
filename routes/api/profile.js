@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const auth = require('../../controllers/auth');
+const auth = require('../../middleware/auth');
 const ProfileController = require('../../controllers/ProfileController');
 const validator = require('../../controllers/validator');
 const checkObjectId = require('../../middleware/checkObjectId');
@@ -27,3 +27,5 @@ router.get('/user/:user_id', checkObjectId('user_id'), async ({ params: { user_i
 });
 
 router.delete('/', auth, ProfileController.delete);
+
+module.exports = router;

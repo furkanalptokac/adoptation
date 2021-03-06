@@ -6,17 +6,15 @@ date.setHours(date.getHours() + 3);
 const ProfileSchema = mongoose.model('Profile', new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
     location: {
-        type: String,
-    },
-    status: {
         type: String,
         required: true
     },
     bio: {
         type: String,
+        required: true
     },
     social: {
         twitter: {
@@ -31,4 +29,4 @@ const ProfileSchema = mongoose.model('Profile', new mongoose.Schema({
     },
 }, { timestamps: { currentTime: () =>  date } }));
 
-exports.profile = Profile;
+exports.Profile = ProfileSchema;

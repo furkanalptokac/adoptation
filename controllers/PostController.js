@@ -3,7 +3,8 @@ const { Post } = require('../models/Post');
 exports.createPost = async (req, res) => {
     let post = new Post({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        category: req.body.category
     });
 
     await post.save();

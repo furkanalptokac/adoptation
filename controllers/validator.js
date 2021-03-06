@@ -5,7 +5,6 @@ exports.register = [
     check('surname', 'Soyadiniz bos olamaz.').notEmpty(),
     check('email', 'Lutfen gecerli email giriniz.').isEmail(),
     check('password', 'Parolaniz gereksinimleri karsilamiyor.').isLength({ min: 6 }),
-    check('city', 'Sehir bos olamaz.').notEmpty()
 ];
 
 exports.login = [
@@ -14,5 +13,6 @@ exports.login = [
 ];
 
 exports.profilePost = [
-    check('status', 'Durum gerekli').notEmpty();
+    check('location', 'Şehir bilgisi gerekli').notEmpty(),
+    check('bio', 'Biyografi gerekli').notEmpty(),
 ];

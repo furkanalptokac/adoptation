@@ -21,12 +21,12 @@ const User = mongoose.model('User', new mongoose.Schema({
         type: String,
         required: true
     },
-    city: {
-        type: String,
-        required: true
-    },
     avatar: {
         type: String
+    },
+    posts: {
+        type: Array,
+        default: []
     }
 }, { timestamps: { currentTime: () =>  date } }));
 

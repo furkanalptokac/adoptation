@@ -12,10 +12,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         email: '',
         password: '',
         password2: '',
-        city: ''
     });
 
-    const { name, surname, email, password, password2, city } = formData;
+    const { name, surname, email, password, password2 } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value});
 
@@ -24,7 +23,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         if (password !== password2) {
             setAlert('Parolalar eşleşmiyor.', 'danger');
         } else {
-            register({ name, surname, email, password, city });
+            register({ name, surname, email, password });
         }
     }
 
@@ -90,17 +89,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         placeholder="Parolanızı Onaylayın"
                         name="password2"
                         value={password2}
-                        onChange={e => onChange(e)}
-                        // minLength="6"
-                        // required
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        placeholder="Yaşadığınız Şehir"
-                        name="city"
-                        value={city}
                         onChange={e => onChange(e)}
                         // minLength="6"
                         // required

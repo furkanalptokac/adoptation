@@ -24,15 +24,14 @@ exports.login = async (req, res) => {
 
     try {
         let user = await User.findOne({ email });
-        console.log(user)
         if (!user) {
-            return res.status(400).json({ errors: [{ msg: 'Bir seyler ters gitti.' }] });
+            return res.status(400).json({ errors: [{ msg: 'Email veya parolaniz yanlis.' }] });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({ errors: [{ msg: 'Parolanız yanlış.' }] });
+            return res.status(400).json({ errors: [{ msg: 'Email veya parolaniz yanlis.' }] });
         }
 
         const payload = {

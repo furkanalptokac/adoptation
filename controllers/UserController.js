@@ -41,7 +41,6 @@ exports.signup = async (req, res) => {
                 surname: req.body.surname,
                 email: req.body.email,
                 password: hashedPassword,
-                city: req.body.city,
                 avatar: avatar
             });
 
@@ -168,9 +167,9 @@ exports.updatePassword = async (req, res) => {
 }
 
 exports.forgotPassword = async (req, res) => {
-    await User.findById(req.bod)
+    let user = await User.findById(req.params.id)
 
-    const password = passwordGenerator.generate({
+    let password = passwordGenerator.generate({
         length: 10,
         numbers: true
     });
@@ -189,7 +188,7 @@ exports.forgotPassword = async (req, res) => {
 
     let mailOptions = {
         from: process.env.EMAIL,
-        to: req.body.email,
+        to: user.email,
         subject: 'Sahiplenn Destek',
         text: 'Şifreniz başarıyla sıfırlanmıştır. Yeni şifreniz ' + password
     };
@@ -216,6 +215,18 @@ exports.forgotPassword = async (req, res) => {
 
 exports.deleteFromId = async (req, res) => {
     await User.findByIdAndRemove(req.params.id, function (err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    })
+}
+
+exports.followPost = async (req, res) => {
+    let user = await User.findById(req.params.id);
+    let posts = user.posts + ',' + req.body.id; 
+    await User.findByIdAndUpdate(req.params.id, { posts: posts }, function (err, result) {
         if (err) {
             res.send(err);
         } else {

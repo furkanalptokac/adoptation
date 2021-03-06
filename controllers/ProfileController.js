@@ -1,6 +1,6 @@
-const Profile = require('../../controllers/Profile');
-const User = require('../../controllers/User');
-const Post = require('../../controllers/Post');
+const { Profile } = require('../models/Profile');
+const { User } = require('../models/User');
+const { Post } = require('../models/Post');
 const { validationResult } = require('express-validator');
 
 exports.getProfile = async (req, res) => {
@@ -21,7 +21,7 @@ exports.getProfile = async (req, res) => {
 };
 
 exports.postProfile = async (req, res) => {
-    const errors = validationResult();
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
@@ -33,7 +33,13 @@ exports.postProfile = async (req, res) => {
         ...rest
     } = req.body;
 
+    const profileFields = {
+        user: req.user.id,
+        ...rest
+    };
+
     const socialFields = { twitter, instagram, facebook };
+
     for (const [key, value] of Object.entries(socialFields)) {
         if (value && value.length > 0)
             socialFields[key] = normalize(value, { forceHttps: true });
@@ -43,7 +49,7 @@ exports.postProfile = async (req, res) => {
 
     try {
         let profile = await Profile.findOneAndUpdate(
-            { user: req. user.id },
+            { user: req.user.id },
             { $set: profileFields },
             { new: true, upsert: true, setDefaultsOnInsert: true }
         );

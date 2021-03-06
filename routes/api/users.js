@@ -10,6 +10,8 @@ router.get('/getallusers', UserController.findAllUsers);
 
 router.get('/findfromid/:id', UserController.findFromId);
 
+router.post('/followpost/:id', UserController.followPost);
+
 router.put('/updateuser/:id', UserController.updateUser);
 
 router.put('/updatepassword/:id', UserController.updatePassword);
