@@ -3,7 +3,9 @@ import { setAlert } from './alert';
 
 import { 
     GET_PROFILE,
-    PROFILE_ERROR
+    PROFILE_ERROR,
+    CLEAR_PROFILE,
+    ACCOUNT_DELETED
 } from './types';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -53,4 +55,23 @@ export const createProfile = (formData, history, edit = false) => async dispatch
             payload: { msg: err.response.statusText, status: err.response.status }
         });
     }
+}
+
+export const deleteAccount = id => async dispatch => {
+    if (window.confirm('Hesabınızı silmek istediğinizden emin misiniz?')) {
+        try {
+            const res = await axios.delete(`http://localhost:5000/api/profile/`);
+    
+            dispatch({ type: CLEAR_PROFILE });
+            dispatch({ type: ACCOUNT_DELETED });
+
+            dispatch(setAlert('Hesabınız kalıcı olarak silindi.'));
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: { msg: err.response.statusText, status: err.response.status }
+            })
+        }
+    }
+    
 }
