@@ -5,7 +5,8 @@ import {
     GET_PROFILE,
     PROFILE_ERROR,
     CLEAR_PROFILE,
-    ACCOUNT_DELETED
+    ACCOUNT_DELETED,
+    GET_PROFILES
 } from './types';
 
 export const getCurrentProfile = () => async dispatch => {
@@ -23,6 +24,24 @@ export const getCurrentProfile = () => async dispatch => {
         });
     }
 };
+
+export const getProfiles = () => async dispatch => {
+    dispatch({ type: CLEAR_PROFILE })
+
+    try {
+        const res = await axios.get('http://localhost:5000/api/profile/')
+        console.log(res.data)
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
 
 export const createProfile = (formData, history, edit = false) => async dispatch => {
     try {
