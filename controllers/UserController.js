@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const gravatar = require('gravatar');
 const { validationResult } = require('express-validator');
+const normalize = require('normalize-url');
 const config = require('../config/config');
 const { User } = require('../models/User');
 const schema = new passwordValidator();
@@ -29,11 +30,13 @@ exports.signup = async (req, res) => {
         return res.status(400).send('Kayitli kullanici mevcut.');
     } else {
         if (schema.validate(req.body.password) && emailValidator.validate(req.body.email)) {
-            let avatar = gravatar.url(req.body.email, {
+            let avatar = normalize(
+                gravatar.url(req.body.email, {
                 s: '200',
                 r: 'pg',
                 d: 'mm'
-            });
+            }), { forceHttps: true }
+            );
 
             let hashedPassword = bcrypt.hashSync(req.body.password, 10);
             user = new User({
