@@ -4,24 +4,51 @@ var date = new Date();
 date.setHours(date.getHours() + 3);
 
 const Post = mongoose.model('Post', new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 100
+    user: {
+        type: Schema.Types.ObjectId
     },
-    description: {
+    text: {
         type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 300
+        required: true
     },
-    category: {
-        type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 300
+    name: {
+        type: String
+    },
+    avatar: {
+        type: String
+    },
+    likes: [
+        {
+            user: {
+                type: Schema.Types.ObjectId
+            }
+        }
+    ],
+    comments: [
+        {
+            user: {
+                type: Schema.Types.ObjectId
+            },
+            text: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String
+            },
+            avatar: {
+                type: String
+            },
+            date: {
+                type: Date,
+                default: { currentTime: () => date }
+            }
+        }
+    ],
+    date: {
+        type: Date,
+        default: { currentTime: () => date }
     }
-}, { timestamps: { currentTime: () => date } }));
+}))
 
 exports.Post = Post;
