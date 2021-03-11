@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.post('/createpost', PostController.createPost);
 
-router.get('/getallposts', PostController.getAllPosts);
+router.get('/', PostController.getAllPosts);
 
 router.get('/getpostfromid/:id', PostController.getPostFromId);
 
