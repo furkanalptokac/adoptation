@@ -1,4 +1,4 @@
-const { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } = require("../actions/types");
+const { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, GET_PROFILES } = require("../actions/types");
 
 const initialState = {
     profile: null,
@@ -15,6 +15,12 @@ function profileReducer (state = initialState, action) {
             return {
                 ...state,
                 profile: payload,
+                loading: false
+            };
+        case GET_PROFILES:
+            return {
+                ...state,
+                profiles: payload,
                 loading: false
             };
         case PROFILE_ERROR:

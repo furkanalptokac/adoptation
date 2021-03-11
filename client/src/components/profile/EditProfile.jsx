@@ -35,7 +35,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
             facebook: loading || !profile.social ? '' : profile.social.facebook,
             instagram: loading || !profile.social ? '' : profile.social.instagram,
         });
-    }, [loading])
+    }, [loading, getCurrentProfile, profile.bio, profile.location, profile.social, profile.status]);
 
     const onSubmit = e => {
         e.preventDefault();

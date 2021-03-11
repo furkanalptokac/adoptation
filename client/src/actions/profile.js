@@ -30,7 +30,7 @@ export const getProfiles = () => async dispatch => {
 
     try {
         const res = await axios.get('http://localhost:5000/api/profile/')
-        console.log(res.data)
+        // console.log(res.data)
         dispatch({
             type: GET_PROFILES,
             payload: res.data
@@ -76,10 +76,26 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 }
 
+export const getProfileById = (userId) => async dispatch => {
+    try {
+        const res = await axios.get(`http://localhost:5000/api/profile/user/${userId}`)
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
 export const deleteAccount = id => async dispatch => {
     if (window.confirm('Hesabınızı silmek istediğinizden emin misiniz?')) {
         try {
-            const res = await axios.delete(`http://localhost:5000/api/profile/`);
+            await axios.delete(`http://localhost:5000/api/profile/`);
     
             dispatch({ type: CLEAR_PROFILE });
             dispatch({ type: ACCOUNT_DELETED });

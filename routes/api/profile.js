@@ -3,6 +3,7 @@ const auth = require('../../middleware/auth');
 const ProfileController = require('../../controllers/ProfileController');
 const validator = require('../../controllers/validator');
 const checkObjectId = require('../../middleware/checkObjectId');
+const { Profile } = require('../../models/Profile')
 
 router.get('/me', auth, ProfileController.getProfile);
 
@@ -17,7 +18,7 @@ router.get('/user/:user_id', checkObjectId('user_id'), async ({ params: { user_i
         }).populate('user', ['name', 'avatar']);
 
         if (!profile)
-            return res.status(400).json({ msg: 'Profile not found '});
+            return res.status(400).json({ msg: 'Profil bulunamadı. '});
         
         res.json(profile);
     } catch (err) {
