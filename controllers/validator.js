@@ -16,3 +16,7 @@ exports.profilePost = [
     check('location', 'Şehir bilgisi gerekli').notEmpty(),
     check('bio', 'Biyografi gerekli').notEmpty(),
 ];
+
+exports.getPosts = [
+    check('text', 'İlan içeriği zorunludur.').notEmpty(),
+]

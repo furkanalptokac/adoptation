@@ -1,26 +1,40 @@
 const { Post } = require('../models/Post');
+const { User } = require('../models/User');
+const { validationResult } = require('express-validator');
 
 exports.createPost = async (req, res) => {
-    let post = new Post({
-        title: req.body.title,
-        description: req.body.description,
-        category: req.body.category
-    });
+    const errors = validationResult(req);
 
-    await post.save();
-    res.send(post);
+    if (!errors.isEmpty())
+        return res.status(400).json({ error: errors.array()});
+
+        try {
+            const user = await User.findById(req.user.id).select('-password');
+
+            const newPost = new Post({
+                text: req.body.text,
+                name: req.body.name,
+                avatar: user.avatar,
+                user: req.user.id
+            });
+
+            const post = await newPost.save();
+
+            res.json(post);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server error.');
+        }
 }
 
 exports.getAllPosts = async (req, res) => {
-    await Post.find({}, function (err, posts) {
-        var postMap = {};
-
-        posts.forEach(function (post) {
-            postMap[post._id] = post;
-        });
-
-        res.send(postMap);
-    });
+    try {
+        const posts = await Post.find().sort({ date: -1 })
+        res.json(posts)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+    }
 }
 
 exports.getPostFromId = async (req, res) => {

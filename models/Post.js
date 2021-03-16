@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 var date = new Date();
 date.setHours(date.getHours() + 3);
@@ -12,7 +13,8 @@ const Post = mongoose.model('Post', new mongoose.Schema({
         required: true
     },
     name: {
-        type: String
+        type: String,
+        required: true
     },
     avatar: {
         type: String
@@ -39,16 +41,8 @@ const Post = mongoose.model('Post', new mongoose.Schema({
             avatar: {
                 type: String
             },
-            date: {
-                type: Date,
-                default: { currentTime: () => date }
-            }
-        }
+        }, { timestamps: { currentTime: () =>  date } }
     ],
-    date: {
-        type: Date,
-        default: { currentTime: () => date }
-    }
-}))
+}, { timestamps: { currentTime: () =>  date } }))
 
 exports.Post = Post;

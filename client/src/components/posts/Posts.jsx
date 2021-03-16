@@ -12,9 +12,6 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
     return loading ? <Spinner /> : <Fragment>
         <h1 className="large text-primary">İlanlar</h1>
-        <p className="lead">
-            <i className="fas fa-user"></i> Hoşgeldin!
-        </p>
 
         <div className="posts">
             {posts.map(post => (
