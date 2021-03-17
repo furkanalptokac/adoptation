@@ -25,8 +25,68 @@ router.get('/:id', auth, checkObjectId('id'), async (req, res) => {
       }
 });
 
+router.put('/like/:id', auth, checkObjectId('id'), async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (post.likes.some((like) => like.user.toString() === req.user.id)) {
+      return res.status(400).json({ msg: 'Gönderi zaten beğenilmiş.' });
+    }
+
+    post.likes.unshift({ user: req.user.id });
+
+    await post.save();
+    
+    return res.json(post.likes)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error.');
+  }
+})
+
+router.put('/unlike/:id', auth, checkObjectId('id'), async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
+      return res.status(400).json({ msg: 'Post has not yet been liked' });
+    }
+
+    post.likes = post.likes.filter(
+      ({ user }) => user.toString() !== req.user.id
+    );
+
+    await post.save();
+
+    return res.json(post.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 router.put('/updatepost/:id', PostController.updatePost);
 
-router.delete('/deletepost/:id', PostController.deletePost);
+router.delete('/:id', auth, checkObjectId('id'), async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ msg: 'Post not found' });
+    }
+
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    await post.remove();
+
+    res.json({ msg: 'Post removed' });
+  } catch (err) {
+    console.error(err.message);
+
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
