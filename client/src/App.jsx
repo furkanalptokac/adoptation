@@ -11,6 +11,7 @@ import EditProfile from './components/profile/EditProfile';
 import Profiles from './components/profile/Profiles'
 import Profile from './components/profile/Profile'
 import Posts from './components/posts/Posts'
+import Post from './components/post/Post'
 import PrivateRoute from './components/routing/PrivateRoute';
 import { loadUser } from './actions/auth'
 import setAuthToken from './utils/setAuthToken';
@@ -43,6 +44,7 @@ const App = () => {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/posts" component={Posts} />
+              <PrivateRoute exact path="/posts/:id" component={Post} />
               <PrivateRoute exact path="/profiles" component={Profiles} />
               <PrivateRoute exact path="/profile/:id" component={Profile} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />

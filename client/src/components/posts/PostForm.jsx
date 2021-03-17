@@ -33,7 +33,7 @@ const PostForm = ({ addPost }) => {
                     name="text"
                     cols="30"
                     rows="5"
-                    placeholder="İlan oluştur"
+                    placeholder="İlan içeriği"
                     value={text}
                     onChange={e => onChange(e)}
                     required
