@@ -29,7 +29,7 @@ export const getProfiles = () => async dispatch => {
     dispatch({ type: CLEAR_PROFILE })
 
     try {
-        const res = await axios.get('api/profile/')
+        const res = await axios.get('api/profile')
         // console.log(res.data)
         dispatch({
             type: GET_PROFILES,
@@ -78,7 +78,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
 
 export const getProfileById = (userId) => async dispatch => {
     try {
-        const res = await axios.get(`api/profile/user/${userId}`)
+        const res = await axios.get(`/api/profile/user/${userId}`)
 
         dispatch({
             type: GET_PROFILE,
@@ -95,7 +95,7 @@ export const getProfileById = (userId) => async dispatch => {
 export const deleteAccount = id => async dispatch => {
     if (window.confirm('Hesabınızı silmek istediğinizden emin misiniz?')) {
         try {
-            await axios.delete(`api/profile/`);
+            await axios.delete(`/api/profile/`);
     
             dispatch({ type: CLEAR_PROFILE });
             dispatch({ type: ACCOUNT_DELETED });

@@ -7,7 +7,6 @@ const ProfileItem = ({
         user: { _id, name, avatar },
         location
 }}) => {
-    console.log(_id)
     return <div className="profile bg-light">
         <img src={avatar} alt="" className="round-img"/>
         <div>
