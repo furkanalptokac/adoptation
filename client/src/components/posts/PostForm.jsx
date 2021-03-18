@@ -37,8 +37,8 @@ const PostForm = ({ addPost }) => {
                     value={text}
                     onChange={e => onChange(e)}
                     required
-                ></textarea>
-                <input type="submit" class="btn btn-dark my-1" value="Oluştur" />
+                />
+                <input type="submit" className="btn btn-dark my-1" value="Oluştur" />
             </form>
         </div>
     )

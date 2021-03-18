@@ -41,8 +41,16 @@ const Post = mongoose.model('Post', new mongoose.Schema({
             avatar: {
                 type: String
             },
-        }, { timestamps: { currentTime: () =>  date } }
+            date: {
+                type: Date,
+                default: date
+            }
+        }
     ],
-}, { timestamps: { currentTime: () =>  date } }))
+    date: {
+        type: Date,
+        default: date
+    }
+}))
 
 exports.Post = Post;

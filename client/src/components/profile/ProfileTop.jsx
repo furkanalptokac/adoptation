@@ -21,17 +21,17 @@ const ProfileTop = ({
             <div className="icons my-1">
                 {social && social.facebook && (
                     <a href={social.facebook} target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-facebook"></i>
+                        <i className="fab fa-facebook"></i>
                     </a>
                 )}
                 {social && social.twitter && (
                     <a href={social.twitter} target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-twitter"></i>
+                        <i className="fab fa-twitter"></i>
                     </a>
                 )}
                 {social && social.instagram && (
                     <a href={social.instagram} target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-instagram"></i>
+                        <i className="fab fa-instagram"></i>
                     </a>
                 )}
             </div>
