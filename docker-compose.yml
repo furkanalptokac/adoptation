@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sahiplenn-backend
+    container_name: server
+    command: npm run server
+    volumes:
+      - ./app
+      - /app/node_modules
+    ports:
+      - "5000:5000"
+    env_file: .env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: sahiplenn-client
+    container_name: client
+    command: npm start
+    volumes:
+      - ./client/:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local
