@@ -4,7 +4,6 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/db');
 
 const corsOptions = {
@@ -21,6 +20,8 @@ app.use('/api/auth', require(('./routes/api/auth')));
 app.use('/api/profile', require(('./routes/api/profile')));
 
 connectDB();
+
+app.set('port', (process.env.PORT || 5000));
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
