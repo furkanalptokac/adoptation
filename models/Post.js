@@ -8,13 +8,16 @@ const Post = mongoose.model('Post', new mongoose.Schema({
     user: {
         type: Schema.Types.ObjectId
     },
+    title: {
+        type: String,
+        required: true
+    },
     text: {
         type: String,
         required: true
     },
     name: {
         type: String,
-        required: true
     },
     avatar: {
         type: String
@@ -47,6 +50,9 @@ const Post = mongoose.model('Post', new mongoose.Schema({
             }
         }
     ],
+    category: {
+        type: String
+    },
     date: {
         type: Date,
         default: date

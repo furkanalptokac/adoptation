@@ -5,7 +5,14 @@ import { connect } from 'react-redux'
 import { addLike, removeLike, deletePost } from '../../actions/post'
 import formatDate from '../../actions/formatDate'
 
-const PostItem = ({ addLike, removeLike, deletePost, auth, post: {_id, text, name, avatar, user, likes, comments, date}, showActions }) => {
+const PostItem = ({
+    addLike,
+    removeLike,
+    deletePost,
+    auth,
+    post: {_id, title, text, name, avatar, user, likes, comments, date, category},
+    showActions
+}) => {
     return (
         <div className="post bg-white p-1 my-1">
             <div>
@@ -15,9 +22,11 @@ const PostItem = ({ addLike, removeLike, deletePost, auth, post: {_id, text, nam
                 </Link>
             </div>
             <div>
+                <h2>{title}</h2>
                 <p className="my-1">
                     {text}
                 </p>
+                <small>Tür: {category}</small>
                 <p className="post-date">{formatDate(date)} tarihinde paylaşıldı.</p>
 
                 {showActions && <Fragment>

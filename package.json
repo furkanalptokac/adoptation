@@ -40,7 +40,8 @@
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",
     "normalize-url": "^4.5.0",
-    "password-validator": "^5.1.1"
+    "password-validator": "^5.1.1",
+    "react-select": "^4.2.1"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",

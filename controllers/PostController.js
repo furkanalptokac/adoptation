@@ -11,11 +11,17 @@ exports.createPost = async (req, res) => {
         try {
             const user = await User.findById(req.user.id).select('-password');
 
+            if (req.body.category === null) {
+                return res.status(400).send('Kategori boş olamaz.');
+            }
+
             const newPost = new Post({
+                title: req.body.title,
                 text: req.body.text,
-                name: req.body.name,
+                name: user.name,
+                category: req.body.category,
                 avatar: user.avatar,
-                user: req.user.id
+                user: req.user.id,
             });
 
             const post = await newPost.save();

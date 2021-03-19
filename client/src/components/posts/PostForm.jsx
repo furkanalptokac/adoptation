@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import { addPost } from '../../actions/post'
 
 const PostForm = ({ addPost }) => {
-    const [postData, setPostData] = useState({
-        name: '',
-        text: ''
-    });
-
-    const { name, text } = postData
-
-    const onChange = e => setPostData({ ...postData, [e.target.name]: e.target.value})
+    const [title, setTitle] = useState('')
+    const [text, setText] = useState('')
+    const [category, setCategory] = useState('')
     
     return (
         <div className="post-form">
@@ -20,13 +16,29 @@ const PostForm = ({ addPost }) => {
             </div>
             <form className="form my-1" onSubmit={e => {
                 e.preventDefault()
-                addPost({ text, name })
+                addPost({ text, title, category })
+                setTitle('')
+                setText('')
+                setCategory('')
             }}>
+                <select 
+                    name="category"
+                    required
+                    value={category}
+                    onChange={e => setCategory(e.target.value)}
+                >
+                    <option value="" disabled>Tür</option>
+                    <option value="Kedi">Kedi</option>
+                    <option value="Köpek">Köpek</option>
+                    <option value="Balık">Balık</option>
+                    <option value="Kuş">Kuş</option>
+                    <option value="Diğer">Diğer</option>
+                </select>
                 <textarea
-                    name="name"
+                    name="title"
                     placeholder="İlan başlığı"
-                    value={name}
-                    onChange={e => onChange(e)}
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
                     required
                 ></textarea>
                 <textarea
@@ -35,7 +47,7 @@ const PostForm = ({ addPost }) => {
                     rows="5"
                     placeholder="İlan içeriği"
                     value={text}
-                    onChange={e => onChange(e)}
+                    onChange={e => setText(e.target.value)}
                     required
                 />
                 <input type="submit" className="btn btn-dark my-1" value="Oluştur" />
@@ -43,7 +55,6 @@ const PostForm = ({ addPost }) => {
         </div>
     )
 }
-
 
 PostForm.propTypes = {
     addPost: PropTypes.func.isRequired

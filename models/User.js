@@ -27,6 +27,14 @@ const User = mongoose.model('User', new mongoose.Schema({
     posts: {
         type: Array,
         default: []
+    },
+    admin: {
+        type: Boolean,
+        default: false
+    },
+    followedPosts: {
+        type: Array,
+        default: []
     }
 }, { timestamps: { currentTime: () =>  date } }));
 
