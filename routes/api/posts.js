@@ -27,6 +27,24 @@ router.get('/:id', auth, checkObjectId('id'), async (req, res) => {
       }
 });
 
+router.put('/follow/:id', auth, checkObjectId('id'), async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (user.followedPosts.some((post) => post.post.toString() === req.user.id)) {
+      return res.status(400).json({ msg: 'Gönderi zaten takip edilmiş.' });
+    }
+
+    user.followedPosts.unshift({ post: req.body.id })
+
+    await user.save()
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error.');
+  }
+})
+
 router.put('/like/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);

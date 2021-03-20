@@ -14,6 +14,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 </Link>
             </li>
             <li>
+                <Link to="/favorites">
+                    <i className="fas fa-heart" />{' '}
+                    <span className="hide-sm">Favoriler</span>
+                </Link>
+            </li>
+            <li>
                 <Link to="/profiles">
                 <i className="fas fa-user-friends" />{' '}
                     <span className="hide-sm">Profiller</span>
@@ -49,7 +55,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <nav className="navbar bg-dark">
             <h1>
                 <Link to="/">
-                    <i className="fas"/> Sahiplenn
+                    <i className="fas fa-paw"/> Sahiplenn
                 </Link>
             </h1>
             { !loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>) }

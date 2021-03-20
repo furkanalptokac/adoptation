@@ -6,7 +6,8 @@ import {
     ADD_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
+    FOLLOW_POST
 } from '../actions/types'
 
 const initialState = {
@@ -42,6 +43,12 @@ function postReducer (state = initialState, action) {
             return {
                 ...state,
                 posts: [payload, ...state.posts],
+                loading: false
+            }
+        case FOLLOW_POST:
+            return {
+                ...state,
+                post: [payload, ...state.posts],
                 loading: false
             }
         case POST_ERROR:

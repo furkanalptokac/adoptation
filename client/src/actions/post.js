@@ -8,7 +8,8 @@ import {
     ADD_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
+    FOLLOW_POST
 } from './types'
 
 export const getPosts = () => async dispatch => {
@@ -50,6 +51,29 @@ export const addLike = id => async dispatch => {
         dispatch({
             type: UPDATE_LIKES,
             payload: { id, likes: res.data }
+        })
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+export const followPost = (id, userId) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        console.log(id, userId)
+        const body = JSON.stringify({ id });
+        const res = await axios.put(`/api/posts/follow/${userId}`, body, config);
+
+        dispatch({
+            type: FOLLOW_POST,
+            payload: { id, followedPosts: res.data }
         })
     } catch (err) {
         dispatch({

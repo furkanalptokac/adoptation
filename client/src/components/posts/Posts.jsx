@@ -34,8 +34,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
             </select>
 
         </form>
-        
-
+    
         <div className="posts">
             {posts.map(post => (
                 category === "Hepsi" ? (
