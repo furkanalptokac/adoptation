@@ -55,7 +55,7 @@ const Login = ({ login, isAuthenticated }) => {
             </form>
             <p className="my-1">
                 Hesabınız yok mu?
-                <Link to="/register">Kayıt Ol</Link>
+                <Link to="/register"> Kayıt Ol</Link>
             </p>
         </Fragment>
     )

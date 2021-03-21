@@ -98,7 +98,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             </form>
             <p className="my-1">
                 Hesabınız var mı? 
-                <Link to="/login">Giriş Yap</Link>
+                <Link to="/login"> Giriş Yap</Link>
             </p>
         </Fragment>
     );

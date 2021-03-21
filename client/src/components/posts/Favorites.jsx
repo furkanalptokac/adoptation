@@ -4,15 +4,22 @@ import { connect } from 'react-redux'
 import PostItem from './PostItem'
 import { getPost, getPosts } from '../../actions/post'
 
+/*
+user.followedPosts.some(item => console.log(item.post) &&
+                item.post === post._id) &&
+                <PostItem key={post._id} post={post} />
+*/
+
 const Favorites = ({ getPosts, getPost, auth: { user }, post: { posts, loading } }) => {
     useEffect(() => {
         getPosts()
     }, [getPosts])
+
     return (
         <div>
             <h1 className="large text-primary">Takip Edilen İlanlar</h1>
-            {posts.map(post => (
-                user.followedPosts.some(item => item.post === post._id) && (<PostItem key={post._id} post={post} />)
+            {user.followedPosts.map(post => (
+                <PostItem key={post.post} post={post} />
             ))}
         </div>
     )

@@ -106,3 +106,5 @@ dist
 .vscode
 
 client/build
+
+.idea
