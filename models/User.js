@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 var date = new Date();
 date.setHours(date.getHours() + 3);
@@ -32,10 +33,13 @@ const User = mongoose.model('User', new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    followedPosts: {
-        type: Array,
-        default: []
-    }
+    favorites: [
+        {
+            post: {
+                type: Schema.Types.ObjectId
+            }
+        }
+    ],
 }, { timestamps: { currentTime: () =>  date } }));
 
 exports.User = User;

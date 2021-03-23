@@ -31,12 +31,11 @@ router.put('/follow/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
-    if (user.followedPosts.some(post => post._id.toString() === req.body.id)) {
-      console.log('already followed')
+    if (user.favorites.some(post => post._id.toString() === req.body.postId)) {
       return res.status(400).json({ msg: 'Gönderi zaten takip edilmiş.' });
     }
 
-    user.followedPosts.unshift({ _id: req.body.id });
+    user.favorites.unshift({ _id: req.body.postId });
 
     await user.save();
   } catch (err) {

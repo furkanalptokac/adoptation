@@ -8,10 +8,10 @@ import { getPosts } from '../../actions/post'
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
     const [category, setCategory] = useState('Hepsi')
-    
     useEffect(() => {
         getPosts()
     }, [getPosts])
+
     return loading ? <Spinner /> : <Fragment>
         <PostForm />
 

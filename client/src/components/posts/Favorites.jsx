@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PostItem from './PostItem'
+import Spinner from '../layout/Spinner'
 import { getPost, getPosts } from '../../actions/post'
 
 /*
 user.followedPosts.some(item => console.log(item.post) &&
                 item.post === post._id) &&
                 <PostItem key={post._id} post={post} />
+
+
+                {posts.map(post =>
+                    user.favorites.some(item => console.log(item._id))
+                    )}
+
+                    user.favorites.some(item => console.log(item._id))
 */
 
 const Favorites = ({ getPosts, getPost, auth: { user }, post: { posts, loading } }) => {
@@ -15,13 +23,20 @@ const Favorites = ({ getPosts, getPost, auth: { user }, post: { posts, loading }
         getPosts()
     }, [getPosts])
 
-    return (
-        <div>
+    return ( loading ? <Spinner /> : <Fragment>
             <h1 className="large text-primary">Takip Edilen İlanlar</h1>
-            {user.followedPosts.map(post => (
-                <PostItem key={post.post} post={post} />
-            ))}
-        </div>
+
+            <div className="posts">
+                {loading || user === null ? <Spinner /> :
+                posts.map(post =>
+                    user.favorites.some(item =>
+                        item._id === post._id &&
+                        console.log(post._id) &&
+                        <PostItem key={post._id} post={post} />
+                    )
+                )}
+            </div>
+        </Fragment>
     )
 }
 

@@ -48,7 +48,7 @@ const PostItem = ({
                             <i className="fas fa-times"/>
                         </button>
                     )}
-                    <button onClick={e => {followPost(_id, user)}} type="submit" className="btn btn-success">
+                    <button onClick={e => {followPost(_id, auth.user._id)}} type="submit" className="btn btn-success">
                             <i className="fas fa-heart"/>
                     </button>
                 </Fragment>}

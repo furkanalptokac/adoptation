@@ -60,20 +60,21 @@ export const addLike = id => async dispatch => {
     }
 }
 
-export const followPost = (id, userId) => async dispatch => {
+export const followPost = (postId, userId) => async dispatch => {
     try {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         };
-        console.log(id, userId)
-        const body = JSON.stringify({ id });
+
+        const body = JSON.stringify({ postId });
+        console.log('badi'+body)
         const res = await axios.put(`/api/posts/follow/${userId}`, body, config);
 
         dispatch({
             type: FOLLOW_POST,
-            payload: { id, followedPosts: res.data }
+            payload: { postId, followedPosts: res.data }
         })
     } catch (err) {
         dispatch({
