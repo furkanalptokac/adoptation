@@ -29,9 +29,8 @@ const Favorites = ({ getPosts, getPost, auth: { user }, post: { posts, loading }
             <div className="posts">
                 {loading || user === null ? <Spinner /> :
                 posts.map(post =>
-                    user.favorites.some(item =>
+                    user.favorites.map(item =>
                         item._id === post._id &&
-                        console.log(post._id) &&
                         <PostItem key={post._id} post={post} />
                     )
                 )}
