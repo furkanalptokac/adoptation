@@ -95,7 +95,7 @@ export const getProfileById = (userId) => async dispatch => {
 export const deleteAccount = id => async dispatch => {
     if (window.confirm('Hesabınızı silmek istediğinizden emin misiniz?')) {
         try {
-            await axios.delete(`/api/profile/`);
+            await axios.delete(`/api/profile/${id}`);
     
             dispatch({ type: CLEAR_PROFILE });
             dispatch({ type: ACCOUNT_DELETED });
@@ -109,4 +109,22 @@ export const deleteAccount = id => async dispatch => {
         }
     }
     
+}
+
+export const changePassword = form => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        const body = JSON.stringify({ password: form.password1 });
+        
+        await axios.put(`/api/users/updatepassword/${form._id}`, body, config);
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
 }

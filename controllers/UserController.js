@@ -158,15 +158,22 @@ exports.updateUser = async (req, res) => {
 }
 
 exports.updatePassword = async (req, res) => {
-    await User.findByIdAndUpdate(req.params.id, {
-        password: req.body.password
-    }, function (err, result) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(result);
-        }
-    });
+    try {
+        let hashedPassword = bcrypt.hashSync(req.body.password, 10);
+
+        await User.findByIdAndUpdate(req.params.id, {
+            password: hashedPassword
+        }, (err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(result);
+            }
+        });
+    } catch (err) {
+        console.error(err)
+    }
+    
 }
 
 exports.forgotPassword = async (req, res) => {

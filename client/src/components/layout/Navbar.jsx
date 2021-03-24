@@ -7,7 +7,7 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
     const authLinks = (
         <ul>
-            {isAuthenticated && user.admin === true &&
+            {loading || user === null ? '': isAuthenticated && user.admin === true &&
                 <li>
                     <Link to="/admin">
                         <i className="fas fa-user-shield" />{' '}
@@ -36,7 +36,7 @@ const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
             <li>
                 <Link to="/dashboard">
                     <i className="fas fa-user" />{' '}
-                    <span className="hide-sm">Dashboard</span>
+                    <span className="hide-sm">Hesap</span>
                 </Link>
             </li>
             <li>

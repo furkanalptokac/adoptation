@@ -7,6 +7,10 @@ const DashboardActions = () => {
             <Link to="/edit-profile" className="btn btn-light">
                 <i className="fas fa-user-circle text-primary" /> Profili Düzenle
             </Link>
+
+            <Link to="/change-password" className="btn btn-light">
+                <i className="fas fa-key text-primary" /> Parola Değiştir
+            </Link>
         </div>
     )
 }
