@@ -4,11 +4,11 @@
   "description": "A pet adoption application.",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
+    "start": "yarn server",
     "server": "nodemon server",
-    "client-install": "npm install --prefix client",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client-install": "cd client && yarn",
+    "client": "cd client && yarn start",
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "concurrently": "^6.0.0",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -33,6 +34,7 @@
     "express-validator": "^6.10.0",
     "generate-password": "^1.6.0",
     "gravatar": "^1.8.1",
+    "http-proxy-middleware": "^1.0.6",
     "is-empty": "^1.2.0",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
@@ -43,8 +45,5 @@
     "password-validator": "^5.1.1",
     "react-select": "^4.2.1"
   },
-  "devDependencies": {
-    "concurrently": "^6.0.0",
-    "http-proxy-middleware": "^1.0.6"
-  }
+  "devDependencies": {}
 }
