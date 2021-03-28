@@ -54,6 +54,10 @@ const Login = ({ login, isAuthenticated }) => {
                 <input type="submit" className="btn btn-primary" value="Giriş Yap" />
             </form>
             <p className="my-1">
+                Parolanızı mı unuttunuz?
+                <Link to="/forgot-password"> Parola sıfırla</Link>
+            </p>
+            <p className="my-1">
                 Hesabınız yok mu?
                 <Link to="/register"> Kayıt Ol</Link>
             </p>

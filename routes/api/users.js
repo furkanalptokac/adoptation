@@ -16,7 +16,7 @@ router.put('/updateuser/:id', UserController.updateUser);
 
 router.put('/updatepassword/:id', UserController.updatePassword);
 
-router.put('/forgotpassword/:id', UserController.forgotPassword);
+router.put('/forgotpassword', UserController.forgotPassword);
 
 router.delete('/deleteuser', UserController.deleteFromEmail);
 

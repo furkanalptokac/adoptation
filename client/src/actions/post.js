@@ -69,9 +69,9 @@ export const followPost = (postId, userId) => async dispatch => {
         };
 
         const body = JSON.stringify({ postId });
-        console.log('badi'+body)
         const res = await axios.put(`/api/posts/follow/${userId}`, body, config);
 
+        dispatch(setAlert('İlan başarıyla takip edildi.', 'success'));
         dispatch({
             type: FOLLOW_POST,
             payload: { postId, followedPosts: res.data }

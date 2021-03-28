@@ -29,4 +29,7 @@ router.get('/user/:user_id', checkObjectId('user_id'), async ({ params: { user_i
 
 router.delete('/', auth, ProfileController.delete);
 
+router.delete('/:id', auth, ProfileController.ban);
+
+
 module.exports = router;

@@ -14,6 +14,7 @@ import Posts from './components/posts/Posts'
 import Post from './components/post/Post'
 import Admin from './components/admin/Admin'
 import ChangePassword from './components/profile/ChangePassword'
+import ForgotPassword from './components/profile/ForgotPassword'
 import Favorites from './components/posts/Favorites'
 import PrivateRoute from './components/routing/PrivateRoute';
 import { loadUser } from './actions/auth'
@@ -46,6 +47,7 @@ const App = () => {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />
               <PrivateRoute exact path="/profiles" component={Profiles} />

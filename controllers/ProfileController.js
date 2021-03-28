@@ -87,3 +87,18 @@ exports.delete = async (req, res) => {
         res.status(500).send('Server error.');
     }
 }
+
+exports.ban = async (req, res) => {
+    try {
+        await Promise.all([
+            Post.deleteMany({ user: req.params.id }),
+            Profile.findOneAndRemove({ user: req.params.id}),
+            User.findOneAndRemove({ _id: req.params.id })
+        ]);
+
+        res.json({ msg: 'User banned' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error.');
+    }
+}

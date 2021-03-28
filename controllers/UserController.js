@@ -177,8 +177,6 @@ exports.updatePassword = async (req, res) => {
 }
 
 exports.forgotPassword = async (req, res) => {
-    let user = await User.findById(req.params.id)
-
     let password = passwordGenerator.generate({
         length: 10,
         numbers: true
@@ -198,7 +196,7 @@ exports.forgotPassword = async (req, res) => {
 
     let mailOptions = {
         from: process.env.EMAIL,
-        to: user.email,
+        to: req.body.email,
         subject: 'Sahiplenn Destek',
         text: 'Şifreniz başarıyla sıfırlanmıştır. Yeni şifreniz ' + password
     };
@@ -212,9 +210,9 @@ exports.forgotPassword = async (req, res) => {
 
     let hashedPassword = bcrypt.hashSync(password, 10);
 
-    await User.findByIdAndUpdate(req.params.id), {
+    await User.findOneAndUpdate({ email: req.body.email }), {
         password: hashedPassword
-    }, function (err, result) {
+    }, (err, result) => {
         if (err) {
             res.send(err);
         } else {

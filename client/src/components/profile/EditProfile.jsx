@@ -48,7 +48,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
                 Profil Oluştur
             </h1>
             <p className="lead">
-                <i className="fas fa-user"></i> Kendinle ilgili bilgi ver
+                <i className="fas fa-user" /> Kendinle ilgili bilgi ver
             </p>
             <small>* zorunlu alanlar</small>
             <form className="form" onSubmit={e => onSubmit(e)}>
@@ -72,7 +72,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
                     />
                 </div>
                 <div className="form-group social-input">
-                    <i className="fab fa-facebook fa-2x"></i>
+                    <i className="fab fa-facebook fa-2x" />
                     <input
                         type="text"
                         placeholder="Facebook URL"
@@ -82,7 +82,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
                     />
                 </div>
                 <div className="form-group social-input">
-                    <i className="fab fa-twitter fa-2x"></i>
+                    <i className="fab fa-twitter fa-2x" />
                     <input
                         type="text"
                         placeholder="Twitter URL"
@@ -92,7 +92,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
                     />
                 </div>
                 <div className="form-group social-input">
-                    <i className="fab fa-instagram fa-2x"></i>
+                    <i className="fab fa-instagram fa-2x" />
                     <input
                         type="text"
                         placeholder="Instagram URL"
