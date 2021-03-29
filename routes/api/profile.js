@@ -3,7 +3,6 @@ const auth = require('../../middleware/auth');
 const ProfileController = require('../../controllers/ProfileController');
 const validator = require('../../controllers/validator');
 const checkObjectId = require('../../middleware/checkObjectId');
-const { Profile } = require('../../models/Profile');
 
 /** 
  * @api {post} /api/profile/ Post profile
@@ -26,7 +25,7 @@ router.post('/', auth, validator.profilePost, ProfileController.postProfile);
 router.get('/me', auth, ProfileController.getProfile);
 
 /** 
- * @api {get} /api/profile/me Get all profiles
+ * @api {get} /api/profile Get all profiles
  * @apiName Get all profiles
  * @apiGroup Profile 
  */
@@ -49,7 +48,7 @@ router.get('/user/:user_id', checkObjectId('user_id'), ProfileController.getProf
 router.delete('/', auth, ProfileController.deleteUser);
 
 /** 
- * @api {delete} /api/profile/ Remove user
+ * @api {delete} /api/profile/:id Remove user
  * @apiName Remove user
  * @apiGroup Profile
  * @apiParam {id} User id
