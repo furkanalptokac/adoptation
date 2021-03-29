@@ -1,26 +1,8 @@
-const normalize = require('normalize-url');
-
 const { Profile } = require('../models/Profile');
 const { User } = require('../models/User');
 const { Post } = require('../models/Post');
 const { validationResult } = require('express-validator');
-
-exports.getProfile = async (req, res) => {
-    try {
-        const profile = await Profile.findOne({
-            user: req.user.id
-        }).populate('user', ['name', 'avatar']);
-
-        if (!profile) {
-            return res.status(400).json({ msg: 'Bu kullanici icin profil bulunmamakta.' });
-        }
-
-        res.json(profile);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error.');
-    }
-};
+const normalize = require('normalize-url');
 
 exports.postProfile = async (req, res) => {
     const errors = validationResult(req);
@@ -63,6 +45,23 @@ exports.postProfile = async (req, res) => {
     }
 };
 
+exports.getProfile = async (req, res) => {
+    try {
+        const profile = await Profile.findOne({
+            user: req.user.id
+        }).populate('user', ['name', 'avatar']);
+
+        if (!profile) {
+            return res.status(400).json({ msg: 'Bu kullanici icin profil bulunmamakta.' });
+        }
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error.');
+    }
+};
+
 exports.getAllProfiles = async (req, res) => {
     try {
         const profiles = await Profile.find().populate('user', ['name', 'avatar']);
@@ -73,7 +72,23 @@ exports.getAllProfiles = async (req, res) => {
     }
 };
 
-exports.delete = async (req, res) => {
+exports.getProfileFromId = async ({ params: { user_id } }, res) => {
+    try {
+        const profile = await Profile.findOne({
+            user: user_id
+        }).populate('user', ['name', 'avatar']);
+
+        if (!profile)
+            return res.status(400).json({ msg: 'Profil bulunamadı. '});
+        
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).json({ msg: 'Server error' });
+    }
+}
+
+exports.deleteUser = async (req, res) => {
     try {
         await Promise.all([
             Post.deleteMany({ user: req.user.id }),
@@ -88,7 +103,7 @@ exports.delete = async (req, res) => {
     }
 }
 
-exports.ban = async (req, res) => {
+exports.removeUser = async (req, res) => {
     try {
         await Promise.all([
             Post.deleteMany({ user: req.params.id }),
@@ -96,7 +111,7 @@ exports.ban = async (req, res) => {
             User.findOneAndRemove({ _id: req.params.id })
         ]);
 
-        res.json({ msg: 'User banned' });
+        res.json({ msg: 'User removed.' });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error.');
