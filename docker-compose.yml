@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     image: sahiplenn-backend
     container_name: server
-    command: npm run server
+    command: yarn server
     volumes:
       - ./app
       - /app/node_modules
@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
     image: sahiplenn-client
     container_name: client
-    command: npm start
+    command: yarn start
     volumes:
       - ./client/:/app
       - /app/node_modules
