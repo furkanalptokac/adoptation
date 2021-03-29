@@ -26,6 +26,17 @@ yarn
 yarn client-install
 ```
 
+If you want start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker.
+
+```json
+"proxy": "http://server:5000/"
+```
+
+```bash
+docker-compose build
+docker-compose up
+```
+
 After installing all dependencies, create a `.env` file inside sahiplenn and add application's configurations to your `.env` file.
 
 ```env
@@ -40,13 +51,6 @@ After all, you can start the project with:
 
 ```bash
 yarn dev
-```
-
-Or, start with Docker:
-
-```bash
-docker-compose build
-docker-compose up
 ```
 
 ## License
