@@ -19,4 +19,8 @@ exports.profilePost = [
 
 exports.getPosts = [
     check('text', 'İlan içeriği zorunludur.').notEmpty(),
-]
+];
+
+exports.postComment = [
+    check('text', 'Yorum içeriği zorunludur.').notEmpty()
+];
