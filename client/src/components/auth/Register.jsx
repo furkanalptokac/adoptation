@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types'
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-import PropTypes from 'prop-types'
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
@@ -45,7 +45,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         name="name"
                         value={name}
                         onChange={e => onChange(e)}
-                        // required
+                        required
                     />
                 </div>
                 <div className="form-group">
@@ -55,7 +55,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         name="surname"
                         value={surname}
                         onChange={e => onChange(e)}
-                        // required
+                        required
                     />
                 </div>
                 <div className="form-group">
@@ -65,7 +65,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         name="email"
                         value={email}
                         onChange={e => onChange(e)}
-                        // required
+                        required
                     />
                     <small className="form-text">
                         Bu site Gravatar kullanıyor, profil fotoğrafınız olsun isterseniz
@@ -79,9 +79,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         name="password"
                         value={password}
                         onChange={e => onChange(e)}
-                        // minLength="6"
-                        // required
+                        minLength="6"
+                        required
                     />
+                    <small className="form-text">
+                        En az 6 karakter, büyük harf, küçük harf ve rakam zorunludur.
+                    </small>
                 </div>
                 <div className="form-group">
                     <input
@@ -90,8 +93,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                         name="password2"
                         value={password2}
                         onChange={e => onChange(e)}
-                        // minLength="6"
-                        // required
+                        minLength="6"
+                        required
                     />
                 </div>
                 <input type="submit" className="btn btn-primary" value="Kayıt Ol" />
