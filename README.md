@@ -26,6 +26,16 @@ yarn
 yarn client-install
 ```
 
+After installing all dependencies, create a `.env` file inside sahiplenn and add application's configurations to your `.env` file.
+
+```env
+HOST=
+EMAIL=
+EMAIL_PORT=
+EMAIL_PW=
+DB=
+```
+
 If you want start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker.
 
 ```json
@@ -35,16 +45,6 @@ If you want start with Docker, you have to change proxy value `localhost` to `se
 ```bash
 docker-compose build
 docker-compose up
-```
-
-After installing all dependencies, create a `.env` file inside sahiplenn and add application's configurations to your `.env` file.
-
-```env
-HOST=
-EMAIL=
-EMAIL_PORT=
-EMAIL_PW=
-DB=
 ```
 
 After all, you can start the project with:
