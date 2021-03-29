@@ -26,7 +26,11 @@ yarn
 yarn client-install
 ```
 
-Or, start with Docker:
+If you want start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker.
+
+```json
+"proxy": "http://server:5000/"
+```
 
 ```bash
 docker-compose build
