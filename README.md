@@ -41,3 +41,7 @@ After all, you can start the project with:
 ```bash
 yarn dev
 ```
+
+## License
+
+Distributed under the [MIT License](https://github.com/furkanalptokac/sahiplenn/blob/main/LICENSE).
