@@ -36,7 +36,7 @@ EMAIL_PW=
 DB=
 ```
 
-If you want start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker. If you want to start on AWS, you have to set proxy value to server's Public IPv4 address.
+If you want to start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker. If you want to start on AWS, you have to set proxy value to server's Public IPv4 address.
 
 ```json
 "proxy": "http://server:5000/"
