@@ -42,6 +42,13 @@ After all, you can start the project with:
 yarn dev
 ```
 
+Or, start with Docker:
+
+```bash
+docker-compose build
+docker-compose up
+```
+
 ## License
 
 Distributed under the [MIT License](https://github.com/furkanalptokac/sahiplenn/blob/main/LICENSE).
