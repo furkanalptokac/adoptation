@@ -7,163 +7,86 @@ const auth = require('../../middleware/auth');
 const validator = require('../../controllers/validator');
 const checkObjectId = require('../../middleware/checkObjectId');
 
+/** 
+ * @api {post} /api/posts Create post
+ * @apiName Create post
+ * @apiGroup Posts
+ * @apiParam {String} Title
+ * @apiParam {String} Text
+ * @apiParam {String} User's name
+ * @apiParam {String} Category
+ * @apiParam {String} Grvatar link
+ * @apiParam {id} User id
+ */
 router.post('/', auth, PostController.createPost);
 
+/** 
+ * @api {get} /api/posts Get all posts
+ * @apiName Get all posts
+ * @apiGroup Posts
+ */
 router.get('/', auth, PostController.getAllPosts);
 
-router.get('/:id', auth, checkObjectId('id'), async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-    
-        if (!post) {
-          return res.status(404).json({ msg: 'İlan bulunamadı.' });
-        }
-    
-        res.json(post);
-      } catch (err) {
-        console.error(err.message);
-    
-        res.status(500).send('Server Error');
-      }
-});
+/** 
+ * @api {get} /api/posts/:id Get post from id
+ * @apiName Get post from id
+ * @apiGroup Posts
+ * @apiParam {id} Post id
+ */
+router.get('/:id', auth, checkObjectId('id'), PostController.getPostFromId);
 
-router.put('/follow/:id', auth, checkObjectId('id'), async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
+/** 
+ * @api {put} /api/posts/follow/:id Follow post
+ * @apiName Follow post
+ * @apiGroup Posts
+ * @apiParam {id} User id
+ * @apiParam {id} Post id
+ */
+router.put('/follow/:id', auth, checkObjectId('id'), PostController.followPost);
 
-    if (user.favorites.some(post => post._id.toString() === req.body.postId)) {
-      return res.status(400).json({ msg: 'Gönderi zaten takip edilmiş.' });
-    }
+/** 
+ * @api {put} /api/posts/like/:id Like post
+ * @apiName Like post
+ * @apiGroup Posts
+ * @apiParam {id} User id
+ * @apiParam {id} Post id
+ */
+router.put('/like/:id', auth, checkObjectId('id'), PostController.likePost);
 
-    user.favorites.unshift({ _id: req.body.postId });
+/** 
+ * @api {put} /api/posts/unlike/:id Unlike post
+ * @apiName Unlike post
+ * @apiGroup Posts
+ * @apiParam {id} User id
+ * @apiParam {id} Post id
+ */
+router.put('/unlike/:id', auth, checkObjectId('id'), PostController.unlikePost);
 
-    await user.save();
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error.');
-  }
-})
+/** 
+ * @api {delete} /api/posts/:id Delete post
+ * @apiName Delete post
+ * @apiGroup Posts
+ * @apiParam {id} Post id
+ */
+router.delete('/:id', auth, checkObjectId('id'), PostController.deletePost);
 
-router.put('/like/:id', auth, checkObjectId('id'), async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
+/** 
+ * @api {post} /api/posts/comment/:id Post comment
+ * @apiName Post comment
+ * @apiGroup Posts
+ * @apiParam {id} User id
+ * @apiParam {id} Post id
+ * @apiParam {String} text
+ */
+router.post('/comment/:id', auth, checkObjectId('id'), validator.postComment, PostController.postComment);
 
-    if (post.likes.some((like) => like.user.toString() === req.user.id)) {
-      return res.status(400).json({ msg: 'Gönderi zaten beğenilmiş.' });
-    }
-
-    post.likes.unshift({ user: req.user.id });
-
-    await post.save();
-    
-    return res.json(post.likes)
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error.');
-  }
-})
-
-router.put('/unlike/:id', auth, checkObjectId('id'), async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-
-    if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
-      return res.status(400).json({ msg: 'Post has not yet been liked' });
-    }
-
-    post.likes = post.likes.filter(
-      ({ user }) => user.toString() !== req.user.id
-    );
-
-    await post.save();
-
-    return res.json(post.likes);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-
-router.put('/updatepost/:id', PostController.updatePost);
-
-router.delete('/:id', auth, checkObjectId('id'), async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-
-    if (!post) {
-      return res.status(404).json({ msg: 'Post not found' });
-    }
-
-    if (post.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User not authorized' });
-    }
-
-    await post.remove();
-
-    res.json({ msg: 'Post removed' });
-  } catch (err) {
-    console.error(err.message);
-
-    res.status(500).send('Server Error');
-  }
-});
-
-router.post('/comment/:id', auth, checkObjectId('id'), check('text', 'Yorum içeriği zorunludur.').notEmpty(), async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const post = await Post.findById(req.params.id);
-
-      const newComment = {
-        text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.user.id
-      };
-
-      post.comments.unshift(newComment);
-
-      await post.save();
-
-      res.json(post.comments);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-    }
-  }
-);
-
-router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-
-    const comment = post.comments.find(
-      (comment) => comment.id === req.params.comment_id
-    );
-
-    if (!comment) {
-      return res.status(404).json({ msg: 'Yorum bulunamadı' });
-    }
-
-    if (comment.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: 'User not authorized' });
-    }
-
-    post.comments = post.comments.filter(
-      ({ id }) => id !== req.params.comment_id
-    );
-
-    await post.save();
-
-    return res.json(post.comments);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).send('Server error');
-  }
-});
+/** 
+ * @api {delete} /api/posts/comment/:id Delete comment
+ * @apiName Post comment
+ * @apiGroup Posts
+ * @apiParam {id} Post id
+ * @apiParam {id} Comment id
+ */
+router.delete('/comment/:id/:comment_id', auth, PostController.deleteComment);
 
 module.exports = router;
