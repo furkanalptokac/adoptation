@@ -26,6 +26,13 @@ yarn
 yarn client-install
 ```
 
+Or, start with Docker:
+
+```bash
+docker-compose build
+docker-compose up
+```
+
 After installing all dependencies, create a `.env` file inside sahiplenn and add application's configurations to your `.env` file.
 
 ```env
@@ -40,13 +47,6 @@ After all, you can start the project with:
 
 ```bash
 yarn dev
-```
-
-Or, start with Docker:
-
-```bash
-docker-compose build
-docker-compose up
 ```
 
 ## License
