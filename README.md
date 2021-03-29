@@ -26,17 +26,6 @@ yarn
 yarn client-install
 ```
 
-If you want start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker.
-
-```json
-"proxy": "http://server:5000/"
-```
-
-```bash
-docker-compose build
-docker-compose up
-```
-
 After installing all dependencies, create a `.env` file inside sahiplenn and add application's configurations to your `.env` file.
 
 ```env
@@ -45,6 +34,17 @@ EMAIL=
 EMAIL_PORT=
 EMAIL_PW=
 DB=
+```
+
+If you want start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker. If you want to start on AWS, you have to set proxy value to server's Public IPv4 address.
+
+```json
+"proxy": "http://server:5000/"
+```
+
+```bash
+docker-compose build
+docker-compose up
 ```
 
 After all, you can start the project with:
