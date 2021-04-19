@@ -1,21 +1,20 @@
-# sahiplenn
-
-Sahiplenn is a pet adoption social platform and also my final year project which is still under development.
+# adoptation
+Adoptation is a pet adoption social platform and also my final year project which is still under development.
 
 ## Getting Started
 
 ### Installation
-To use Sahiplenn on your machine, first clone this project on your local machine:
+To use Adoptation on your machine, first clone this project on your local machine:
 
 ```bash
-git clone https://github.com/furkanalptokac/sahiplenn.git
+git clone https://github.com/furkanalptokac/adoptation.git
 # or Github CLI or smt...
 ```
 
 After you clone the project:
 
 ```bash
-cd sahiplenn
+cd adoptation
 ```
 
 When you changed your directory to project directory:
@@ -26,7 +25,7 @@ yarn
 yarn client-install
 ```
 
-After installing all dependencies, create a `.env` file inside sahiplenn and add application's configurations to your `.env` file.
+After installing all dependencies, create a `.env` file inside adoptation and add application's configurations to your `.env` file.
 
 ```env
 HOST=
@@ -55,4 +54,4 @@ yarn dev
 
 ## License
 
-Distributed under the [MIT License](https://github.com/furkanalptokac/sahiplenn/blob/main/LICENSE).
+Distributed under the [MIT License](https://github.com/furkanalptokac/adoptation/blob/main/LICENSE).
