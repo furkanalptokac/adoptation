@@ -81,7 +81,7 @@ exports.signup = async (req, res) => {
             let mailOptions = {
                 from: process.env.EMAIL,
                 to: req.body.email,
-                subject: 'Sahiplenn Destek',
+                subject: 'Adoptation Destek',
                 text: 'Kaydınız başarıyla oluşturulmuştur.'
             };
             
@@ -144,7 +144,7 @@ exports.forgotPassword = async (req, res) => {
         let mailOptions = {
             from: process.env.EMAIL,
             to: req.body.email,
-            subject: 'Sahiplenn Destek',
+            subject: 'Adoptation Destek',
             text: 'Parolanız başarıyla sıfırlanmıştır. Yeni parolanız: ' + password
         };
 

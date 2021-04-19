@@ -11,7 +11,7 @@ const Landing = ({ isAuthenticated }) => {
         <section className="landing">
             <div className="dark-overlay">
                 <div className="landing-inner">
-                    <h1 className="x-large">Sahiplenn</h1>
+                    <h1 className="x-large">Adoptation</h1>
                     <p className="lead">
                         Sahiplendireceğiniz canlılarınız yuvasız kalmasın.
                     </p>

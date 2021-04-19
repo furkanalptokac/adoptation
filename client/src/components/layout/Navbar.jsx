@@ -7,7 +7,7 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
     const authLinks = (
         <ul>
-            {loading || user === null ? '': isAuthenticated && user.admin === true &&
+            {loading || user === null ? '' : isAuthenticated && user.admin === true &&
                 <li>
                     <Link to="/admin">
                         <i className="fas fa-user-shield" />{' '}
@@ -15,6 +15,12 @@ const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
                     </Link>
                 </li>
             }
+            <li>
+                <Link to="/report">
+                    <i className="fas fa-flag" />{' '}
+                    <span className="hide-sm">Şikayet Bildir</span>
+                </Link>
+            </li>
             <li>
                 <Link to="/posts">
                     <i className="fas fa-cat" />{' '}
@@ -29,7 +35,7 @@ const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
             </li>
             <li>
                 <Link to="/profiles">
-                <i className="fas fa-user-friends" />{' '}
+                    <i className="fas fa-user-friends" />{' '}
                     <span className="hide-sm">Profiller</span>
                 </Link>
             </li>
@@ -63,12 +69,12 @@ const Navbar = ({ auth: { user, isAuthenticated, loading }, logout }) => {
         <nav className="navbar bg-dark">
             <h1>
                 <Link to="/">
-                    <i className="fas fa-paw"/> Sahiplenn
+                    <i className="fas fa-paw" /> Adoptation
                 </Link>
             </h1>
             { !loading && (<Fragment>
-                { isAuthenticated ? authLinks : guestLinks }
-            </Fragment>) }
+                { isAuthenticated ? authLinks : guestLinks}
+            </Fragment>)}
         </nav>
     )
 }

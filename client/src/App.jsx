@@ -13,6 +13,7 @@ import Profile from './components/profile/Profile'
 import Posts from './components/posts/Posts'
 import Post from './components/post/Post'
 import Admin from './components/admin/Admin'
+import Report from './components/report/Report'
 import ChangePassword from './components/profile/ChangePassword'
 import ForgotPassword from './components/profile/ForgotPassword'
 import Favorites from './components/posts/Favorites'
@@ -41,7 +42,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path='/' component={ Landing } />
+          <Route exact path='/' component={Landing} />
           <section className="container">
             <Alert />
             <Switch>
@@ -58,11 +59,13 @@ const App = () => {
               <PrivateRoute exact path="/favorites" component={Favorites} />
               <PrivateRoute exact path="/admin" component={Admin} />
               <PrivateRoute exact path="/change-password" component={ChangePassword} />
+              <PrivateRoute exact path="/report" component={Report} />
             </Switch>
           </section>
         </Fragment>
       </Router>
     </Provider>
-)};
+  )
+};
 
 export default App;
