@@ -22,9 +22,6 @@ import { loadUser } from './actions/auth'
 import setAuthToken from './utils/setAuthToken';
 import './App.css';
 
-// import for Reactotron
-// import Reactotron from 'reactotron-react-js'
-
 import { Provider } from 'react-redux';
 import store from './store';
 
