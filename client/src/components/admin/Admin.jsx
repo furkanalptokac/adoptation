@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { banUser } from '../../actions/profile'
+
 const Admin = ({ banUser }) => {
     const [id, setId] = useState('')
 
