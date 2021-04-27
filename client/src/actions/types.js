@@ -22,3 +22,4 @@ export const ADD_COMMENT = 'ADD_COMMENT';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const FOLLOW_POST = 'FOLLOW_POST';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+export const REPORT_ERROR = 'REPORT_ERROR';
