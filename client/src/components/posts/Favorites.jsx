@@ -5,37 +5,24 @@ import PostItem from './PostItem'
 import Spinner from '../layout/Spinner'
 import { getPost, getPosts } from '../../actions/post'
 
-/*
-user.followedPosts.some(item => console.log(item.post) &&
-                item.post === post._id) &&
-                <PostItem key={post._id} post={post} />
-
-
-                {posts.map(post =>
-                    user.favorites.some(item => console.log(item._id))
-                    )}
-
-                    user.favorites.some(item => console.log(item._id))
-*/
-
 const Favorites = ({ getPosts, getPost, auth: { user }, post: { posts, loading } }) => {
     useEffect(() => {
         getPosts()
     }, [getPosts])
 
-    return ( loading ? <Spinner /> : <Fragment>
-            <h1 className="large text-primary">Takip Edilen İlanlar</h1>
+    return (loading ? <Spinner /> : <Fragment>
+        <h1 className="large text-primary">Takip Edilen İlanlar</h1>
 
-            <div className="posts">
-                {loading || user === null ? <Spinner /> :
+        <div className="posts">
+            {loading || user === null ? <Spinner /> :
                 posts.map(post =>
                     user.favorites.map(item =>
                         item._id === post._id &&
                         <PostItem key={post._id} post={post} />
                     )
                 )}
-            </div>
-        </Fragment>
+        </div>
+    </Fragment>
     )
 }
 
