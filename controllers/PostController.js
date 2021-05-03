@@ -22,6 +22,8 @@ exports.createPost = async (req, res) => {
             category: req.body.category,
             avatar: user.avatar,
             user: req.user.id,
+            longitude: req.body.longitude,
+            latitude: req.body.latitude
         });
 
         const post = await newPost.save();

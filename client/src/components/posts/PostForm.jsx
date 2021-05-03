@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -8,7 +8,16 @@ const PostForm = ({ addPost }) => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const [category, setCategory] = useState('')
-    
+    const [latitude, setLattitude] = useState('')
+    const [longitude, setLongitude] = useState('')
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            setLattitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+        });
+    })
+
     return (
         <div className="post-form">
             <div className="bg-primary p">
@@ -16,7 +25,7 @@ const PostForm = ({ addPost }) => {
             </div>
             <form className="form my-1" onSubmit={e => {
                 e.preventDefault()
-                addPost({ text, title, category })
+                addPost({ text, title, category, longitude, latitude })
                 setTitle('')
                 setText('')
                 setCategory('')

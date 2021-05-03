@@ -156,6 +156,11 @@ img {
   color: #333;
 }
 
+.post-map {
+  width: 300px;
+  height: 200px;
+}
+
 .btn-primary,
 .bg-primary,
 .badge-primary,

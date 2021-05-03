@@ -13,8 +13,11 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         getPost(match.params.id)
     }, [getPost, match.params.id])
 
+    const link = `http://maps.googleapis.com/maps/api/staticmap?center=${post.latitude},${post.longitude}&zoom=12&size=600x400&markers=${post.latitude},${post.longitude}&key=${process.env.REACT_APP_API_KEY}`
+
     return loading || post === null ? <Spinner /> : <Fragment>
         <Link to="/posts" className="btn">İlanlara geri dön</Link>
+        <img src={link} />
         <PostItem post={post} showActions={false} />
         <CommentForm postId={post._id} />
         <div className="comments">

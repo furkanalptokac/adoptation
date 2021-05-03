@@ -53,6 +53,12 @@ const Post = mongoose.model('Post', new mongoose.Schema({
     category: {
         type: String
     },
+    longitude: {
+        type: String
+    },
+    latitude: {
+        type: String
+    },
     date: {
         type: Date,
         default: date
