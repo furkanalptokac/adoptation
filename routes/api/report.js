@@ -10,4 +10,6 @@ const ReportController = require('../../controllers/ReportController');
  */
 router.post('/', auth, ReportController.report);
 
+router.get('/', auth, ReportController.getReports);
+
 module.exports = router;
