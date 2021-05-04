@@ -35,6 +35,12 @@ EMAIL_PW=
 DB=
 ```
 
+And also, you have to insert your Google API Key to `client/.env` file.
+
+```env
+REACT_APP_API_KEY=
+```
+
 If you want to start with Docker, you have to change proxy value `localhost` to `server` in `package.json` inside client folder first. Because, server is not running under `localhost` on Docker. If you want to start on AWS, you have to set proxy value to server's Public IPv4 address.
 
 ```json
