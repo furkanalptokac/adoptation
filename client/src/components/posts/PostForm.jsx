@@ -12,7 +12,7 @@ const PostForm = ({ addPost }) => {
     const [longitude, setLongitude] = useState('')
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition((position) => {
             setLattitude(position.coords.latitude);
             setLongitude(position.coords.longitude);
         });
