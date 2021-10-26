@@ -1,5 +1,5 @@
 # adoptation
-Adoptation is a pet adoption social platform and also my final year project which is still under development.
+Adoptation is a pet adoption social platform and also my final year project.
 
 ## Getting Started
 
